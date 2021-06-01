@@ -1,0 +1,18 @@
+# list of files not under version control.
+*.class
+*.ear
+*.jar
+*.war
+.classpath
+.metadata
+.project
+.settings
+/bin
+/build
+/target
+hs_err_pid*
+local.properties
+/.idea/
+doc/
+job.log
+employee.iml
