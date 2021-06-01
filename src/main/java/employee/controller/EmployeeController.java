@@ -20,7 +20,7 @@ import employee.dto.EmployeeDto;
 import employee.service.EmpService;
 
 @Controller
-@RequestMapping("/api")
+@RequestMapping("/")
 public class EmployeeController {
 
     @Autowired
@@ -28,12 +28,12 @@ public class EmployeeController {
     @Autowired
     private ObjectMapper objectMapper;
 
-    @PostMapping
-    public ResponseEntity<EmployeeDto> addEmp(@RequestBody NewEmpInput emp) {
-        EmployeeDto employeeDto = empService.addEmp(objectMapper.convertValue(emp, EmployeeDto.class));
-//        LOG.info("Add Employee: " + employeeDto);
-        return ResponseEntity.ok(employeeDto);
-    }
+//    @PostMapping
+//    public ResponseEntity<EmployeeDto> addEmp(@RequestBody NewEmpInput emp) {
+//        EmployeeDto employeeDto = empService.addEmp(objectMapper.convertValue(emp, EmployeeDto.class));
+////        LOG.info("Add Employee: " + employeeDto);
+//        return ResponseEntity.ok(employeeDto);
+//    }
 
 
 //    @RequestMapping(value = "/executesampleservice", method = RequestMethod.POST,
@@ -50,6 +50,12 @@ public class EmployeeController {
 //        return false;
 //    }
 
+    @GetMapping(value={"/", "/index"})
+    public String getHomePage(Model model){
+
+        return "index";
+    }
+
     @GetMapping(value="/login")
     public String getLoginPage(Model model){
         return "login";
@@ -60,24 +66,24 @@ public class EmployeeController {
         return "logout";
     }
 
-    @GetMapping("/employees")
-    public ResponseEntity<List<EmployeeDto>> getAllEmployees() {
-//        LOG.info("Get All Employees: " + empService.getAllEmployees());
-//        System.out.println(getPrincipal());
-        return ResponseEntity.ok(empService.getAllEmployees());
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<EmployeeDto> getEmp(@PathVariable("id") Long id) {
-//        LOG.info("Get Employee: " + empService.getEmpById(id));
-        return ResponseEntity.ok(empService.getEmpById(id));
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<?> removeEmp(@PathVariable("id") Long id) {
-//        LOG.info("Remove Employee: " + empService.getEmpById(id));
-        empService.removeEmp(id);
-        return ResponseEntity.ok(String.format("Employee with ID %s removed", id));
-    }
+//    @GetMapping("/employees")
+//    public ResponseEntity<List<EmployeeDto>> getAllEmployees() {
+////        LOG.info("Get All Employees: " + empService.getAllEmployees());
+////        System.out.println(getPrincipal());
+//        return ResponseEntity.ok(empService.getAllEmployees());
+//    }
+//
+//    @GetMapping("/{id}")
+//    public ResponseEntity<EmployeeDto> getEmp(@PathVariable("id") Long id) {
+////        LOG.info("Get Employee: " + empService.getEmpById(id));
+//        return ResponseEntity.ok(empService.getEmpById(id));
+//    }
+//
+//    @DeleteMapping("/{id}")
+//    public ResponseEntity<?> removeEmp(@PathVariable("id") Long id) {
+////        LOG.info("Remove Employee: " + empService.getEmpById(id));
+//        empService.removeEmp(id);
+//        return ResponseEntity.ok(String.format("Employee with ID %s removed", id));
+//    }
 
 }

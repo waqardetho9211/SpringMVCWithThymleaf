@@ -8,9 +8,10 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
-@EnableWebSecurity(debug=true)
+@EnableWebSecurity(debug=false)
 @EnableGlobalMethodSecurity(jsr250Enabled = true)
 @DeclareRoles({"ROLE_SERVICE","ROLE_ACTUATOR"})
 @ComponentScan(basePackages = "employee")
@@ -19,13 +20,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        http.csrf().disable()
+        http.
+                csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/api/*").hasRole("ACTUATOR")
-                .antMatchers("/api_test/*").hasRole("ACTUATOR")
+                .antMatchers("/", "/index", "/css/*", "/js/*").permitAll()
+                //.antMatchers("/api/*").hasRole("ACTUATOR")
+                //.antMatchers("/api_test/*").hasRole("ACTUATOR")
+                .anyRequest().hasRole("ACTUATOR")
                 //.anyRequest().authenticated()
                 .and()
-                .httpBasic()
+                .formLogin()
+                .loginPage("/login").permitAll()
+                .and()
+                .logout().invalidateHttpSession(true)
+                .clearAuthentication(true)
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .logoutSuccessUrl("/logout-success").permitAll()
                 .and()
                 .jee().mappableRoles("ACTUATOR","SERVICE")
         ;
