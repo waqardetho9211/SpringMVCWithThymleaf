@@ -66,12 +66,13 @@ public class EmployeeController {
         return "logout.html";
     }
 
-//    @GetMapping("/employees")
+    @GetMapping("/guests")
 //    public ResponseEntity<List<EmployeeDto>> getAllEmployees() {
-////        LOG.info("Get All Employees: " + empService.getAllEmployees());
-////        System.out.println(getPrincipal());
-//        return ResponseEntity.ok(empService.getAllEmployees());
-//    }
+    public String getAllEmployees() {
+//        LOG.info("Get All Employees: " + empService.getAllEmployees());
+//        System.out.println(getPrincipal());
+        return "Success";
+    }
 //
 //    @GetMapping("/{id}")
 //    public ResponseEntity<EmployeeDto> getEmp(@PathVariable("id") Long id) {

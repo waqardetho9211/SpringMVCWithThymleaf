@@ -6,22 +6,22 @@
   <display-name>Spring Security Basic Auth Application</display-name>
 
   <!-- Spring root -->
-  <context-param>
-    <param-name>contextClass</param-name>
-    <param-value>
-      org.springframework.web.context.support.AnnotationConfigWebApplicationContext
-    </param-value>
-  </context-param>
-  <context-param>
-    <param-name>contextConfigLocation</param-name>
-    <param-value>employee</param-value>
-  </context-param>
+<!--  <context-param>-->
+<!--    <param-name>contextClass</param-name>-->
+<!--    <param-value>-->
+<!--      org.springframework.web.context.support.AnnotationConfigWebApplicationContext-->
+<!--    </param-value>-->
+<!--  </context-param>-->
+<!--  <context-param>-->
+<!--    <param-name>contextConfigLocation</param-name>-->
+<!--    <param-value>employee</param-value>-->
+<!--  </context-param>-->
 
 
 
-    <!-- AUTHENTICATION METHOD: Basic authentication -->
-    <login-config>
-      <auth-method>BASIC</auth-method>
-    </login-config>
+<!--    &lt;!&ndash; AUTHENTICATION METHOD: Basic authentication &ndash;&gt;-->
+<!--    <login-config>-->
+<!--      <auth-method>BASIC</auth-method>-->
+<!--    </login-config>-->
 
   </web-app>

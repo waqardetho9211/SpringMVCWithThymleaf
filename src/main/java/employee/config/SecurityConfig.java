@@ -4,6 +4,7 @@ import javax.annotation.security.DeclareRoles;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -11,11 +12,12 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
-@EnableWebSecurity(debug=false)
+@EnableWebSecurity(debug=true)
 @EnableGlobalMethodSecurity(jsr250Enabled = true)
 @DeclareRoles({"ROLE_SERVICE","ROLE_ACTUATOR"})
 @ComponentScan(basePackages = "employee")
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -25,9 +27,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/", "/index", "/css/*", "/js/*").permitAll()
                 //.antMatchers("/api/*").hasRole("ACTUATOR")
-                //.antMatchers("/api_test/*").hasRole("ACTUATOR")
-                .anyRequest().hasRole("ACTUATOR")
-                //.anyRequest().authenticated()
+                .antMatchers("/guests").hasRole("ACTUATOR")
+                //.anyRequest().hasRole("ACTUATOR")
+//                .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login").permitAll()
