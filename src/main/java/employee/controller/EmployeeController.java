@@ -53,17 +53,17 @@ public class EmployeeController {
     @GetMapping(value={"/", "/index"})
     public String getHomePage(Model model){
 
-        return "index";
+        return "index.html";
     }
 
     @GetMapping(value="/login")
     public String getLoginPage(Model model){
-        return "login";
+        return "login.html";
     }
 
     @GetMapping(value="/logout-success")
     public String getLogoutPage(Model model){
-        return "logout";
+        return "logout.html";
     }
 
 //    @GetMapping("/employees")
