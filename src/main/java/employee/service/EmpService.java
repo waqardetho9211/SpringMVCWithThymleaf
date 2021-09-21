@@ -1,10 +1,12 @@
 package employee.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -63,4 +65,10 @@ public class EmpService {
         System.out.println("File Received");
         return true;
     }
+
+    @GetMapping
+    public List<Employee> getAllGuests(){
+        return new ArrayList<>(this.employeeRepository.findAll());
+    }
+
 }
