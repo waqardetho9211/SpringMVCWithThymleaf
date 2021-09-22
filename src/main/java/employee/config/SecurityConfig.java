@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -17,13 +18,14 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 //@EnableGlobalMethodSecurity(jsr250Enabled = true)
 //@DeclareRoles({"ROLE_SERVICE","ROLE_ACTUATOR"})
 @ComponentScan(basePackages = "employee")
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder authentication)
             throws Exception
     {
-        authentication.inMemoryAuthentication().withUser("admin").password("admin").roles("ACTUATOR");
+        authentication.inMemoryAuthentication().withUser("admin").password("admin").roles("ADMIN");
         authentication.inMemoryAuthentication().withUser("user1").password("user1").roles("USER");
     }
 
@@ -60,6 +62,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/", "/index", "/css/*", "/js/*").permitAll()
                 .anyRequest().authenticated()
+                .antMatchers("/guests").hasRole("ADMIN")
                 .and()
                 .formLogin()
                 .loginPage("/login").permitAll()
@@ -86,7 +89,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public GrantedAuthoritiesMapper authoritiesMapper(){
         SimpleAuthorityMapper authorityMapper = new SimpleAuthorityMapper();
         authorityMapper.setConvertToUpperCase(true);
-        authorityMapper.setDefaultAuthority("USER");
+        authorityMapper.setDefaultAuthority("ADMIN");
         return authorityMapper;
     }
 

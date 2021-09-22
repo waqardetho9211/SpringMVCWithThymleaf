@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>employee</groupId>
-  <artifactId>employee</artifactId>
+  <artifactId>SpringMVCWithThymleaf</artifactId>
   <version>1.0</version>
   <packaging>war</packaging>
 
@@ -126,6 +126,11 @@
     <dependency>
       <groupId>org.thymeleaf.extras</groupId>
       <artifactId>thymeleaf-extras-java8time</artifactId>
+      <version>${org.thymeleaf.extras-version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.thymeleaf.extras</groupId>
+      <artifactId>thymeleaf-extras-springsecurity4</artifactId>
       <version>${org.thymeleaf.extras-version}</version>
     </dependency>
 

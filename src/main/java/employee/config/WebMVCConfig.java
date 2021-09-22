@@ -31,11 +31,8 @@ import nz.net.ultraq.thymeleaf.LayoutDialect;
 import nz.net.ultraq.thymeleaf.decorators.strategies.GroupingStrategy;
 
 
-//@Configuration
-//@ComponentScan(basePackages = "employee")/**
-// * Java configuration file that is used for Spring MVC and Thymeleaf
-// * configurations
-// */
+@Configuration
+@ComponentScan(basePackages = "employee")
 public class WebMVCConfig implements WebMvcConfigurer,  ApplicationContextAware {
 
     private ApplicationContext applicationContext;
